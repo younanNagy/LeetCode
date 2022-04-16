@@ -28,30 +28,35 @@ class Solution:
   
 # 12. Integer to Roman
     
-    class Solution:
+class Solution:
     def intToRoman(self, num: int) -> str:
-        add={
-            1:"I",
-            5:"V",
-            10:"X",
-            50:"L",
-            100:"C",
+        latin_mapping={
+            1000:"M",   
+            900:"CM",
             500:"D",
-            1000:"M"   
-        }
-        sub={
-            4:"IV",
-            9:"IX",
-            40:"XL",
-            90:"XC",
             400:"CD",
-            900:"CM"
+            100:"C",
+            90:"XC",
+            50:"L",
+            40:"XL",
+            10:"X",
+            9:"IX",
+            5:"V",
+            4:"IV",
+            1:"I"
         }
-        number=str(num)
-        power=len(number)-1
-        for digit in number:  # range(len(number)-1,-1,-1):
-            number_to_convert=int(digit)*10**power
-            print (number_to_convert)
-            power=power-1
+        result=""
+        number_of_latin=0
+        for number in latin_mapping.items():
+            value=number[0]
+            number_of_latin=num//value
+            
+            result+=(number[1]*number_of_latin)   
+            num=num%number[0]
+            
+        return result  
+            
+            
+            
 
            
