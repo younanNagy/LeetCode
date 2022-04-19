@@ -91,3 +91,41 @@ class Solution:
             
         return stack_.pop()!="notValid" 
         
+
+        
+        
+#  99. Recover Binary Search Tree
+        
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+        
+class Solution:
+    def recoverTree(self, root: Optional[TreeNode]) -> None:
+        
+        def recover(root:TreeNode,left_b,right_b,root_ori,left_ori,right_ori):
+            if not root:
+                return
+            if root.val<left_b.val:
+                root.val,left_b.val=left_b.val,root.val
+                root=root_ori
+                left_b=left_ori
+                right_b=right_ori
+            elif root.val>right_b.val:
+                root.val,right_b.val=right_b.val,root.val
+                root=root_ori
+                left_b=left_ori
+                right_b=right_ori
+        
+            recover(root.left,left_b,root,root_ori,left_ori,right_ori)
+            recover(root.right,root,right_b,root_ori,left_ori,right_ori)
+            
+        left_=TreeNode(val=float("-inf"))
+        right_=TreeNode(val=float("inf"))
+        recover(root,left_,right_,root,left_,right_)
+        
