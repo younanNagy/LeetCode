@@ -56,33 +56,38 @@ class Solution:
             
         return result  
             
-            
- 98. Validate Binary Search Tree
-# Definition for a binary tree node.
-import sys
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-def validateNode(root:TreeNode,parent_value,position_of_node)->bool:
-    if root is None:
-        return True
-    if root.left is None and root.right is None:
-        if (root.val>parent_value and position_of_node=="right_node")or (root.val<parent_value and position_of_node=="left_node"):
-            return True
-        else:
-            return False
+
+def validateNode(root:TreeNode,stack_):
+
+    if not root:
+        return stack_
+    
 
     else:
         #left
-        valid_left_branch=validateNode(root.left,root.val,"left_node")
-        #right
-        valid_right_branch=validateNode(root.left,root.val,"right_node")
+        stack_=validateNode(root.left,stack_)
+        top=stack_.pop()
+        if top=="notValid":
+            stack_.append(top)
+            return stack_
+        
+        if top>=root.val:
+            stack_.append("notValid")
+            return stack_
+        
+        stack_.append(root.val)
+        stack_=validateNode(root.right,stack_)
 
-        return valid_left_branch and valid_right_branch
+        return stack_
+
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-         return validateNode(root,float(inf),"left_node")
+        stack_=validateNode(root,[float(-inf)])
+            
+        return stack_.pop()!="notValid" 
         
-           
