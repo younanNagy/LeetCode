@@ -128,4 +128,48 @@ class Solution:
         left_=TreeNode(val=float("-inf"))
         right_=TreeNode(val=float("inf"))
         recover(root,left_,right_,root,left_,right_)
+   
+
+
+
+# 146. LRU Cache
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.cache={}
+        self.capacity_=capacity
+        self.age=0
+        self.aged_nodes=PriorityQueue()
+    
+    def get(self, key: int) -> int:
+        value=self.cache.get(key)
+        if value is None:
+            return -1
+        self.age=self.age+1
+        self.cache[key][1]=self.age
+        return self.cache[key][0]
+
+    def removeLeastRecentlyUsed(self):
+        min_age=float("inf")
+        min_key=-1
+        for key,age in self.cache.items():
+            if age[1]<min_age:
+                min_key=key
+                min_age=age[1]
         
+        if min_key!=-1:
+            self.cache.pop(min_key)
+        
+    def put(self, key: int, value: int) -> None:
+        if len(self.cache)==self.capacity_ and self.cache.get(key)is None:
+            self.removeLeastRecentlyUsed()
+        
+        self.age=self.age+1
+        self.cache[key]=[value,self.age]
+            
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
