@@ -269,3 +269,24 @@ class BSTIterator:
 
     def hasNext(self) -> bool:
         return not self.next_==len(self.ordered)
+
+    
+    22. Generate Parentheses
+    class Solution:
+  
+    def generateParenthesis(self, n: int) -> List[str]:
+        result=[]
+        def getValidCombination(NO_paires:int,NO_closed:int,NO_open:int,combination:str):
+            if(NO_paires==NO_closed==NO_open):
+                result.append(combination)
+                return        
+            if NO_open<NO_paires:
+                getValidCombination(NO_paires,NO_closed,NO_open+1,combination+"(")
+            if NO_closed<NO_open:
+                getValidCombination(NO_paires,NO_closed+1,NO_open,combination+")")
+    
+        
+        
+        
+        getValidCombination(n,0,0,"")
+        return result
