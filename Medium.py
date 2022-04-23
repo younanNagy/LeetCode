@@ -290,3 +290,15 @@ class BSTIterator:
         
         getValidCombination(n,0,0,"")
         return result
+  
+1374. Generate a String With Characters That Have Odd Counts
+class Solution:
+    def generateTheString(self, n: int) -> str:
+        if n%2:
+            result="a"*n
+            return result
+        else:
+            result="a"*(n-1)
+            result=result+"b"
+            return result
+            
