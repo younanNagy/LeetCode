@@ -173,3 +173,99 @@ class LRUCache:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
 # obj.put(key,value)
+
+
+
+173. Binary Search Tree Iterator
+
+
+from collections import deque
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+    
+    def insert(self, val):
+        if not self.val:
+            self.val = val
+            return
+    
+        if self.val == val:
+            return
+    
+        if val < self.val:
+            if self.left:
+                self.left.insert(val)
+                return
+            self.left = TreeNode(val)
+            return
+    
+        if self.right:
+            self.right.insert(val)
+            return
+        self.right = TreeNode(val)
+
+        
+class BSTIterator:
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.stack=dequea()
+        self.TraverseLeft(root)
+    
+    def TraverseLeft(self,root):
+        while root:
+            self.stack.append(root)
+            root=root.left
+            
+            
+    def next(self) -> int:
+        if len(self.stack)==0:
+            return
+        top=self.stack.pop()
+        self.TraverseLeft(top.right)
+        return top.val
+        # cur=top.right
+#         while cur:
+#             self.stack.append(cur)
+#             return self.stack.pop().val
+        
+
+    def hasNext(self) -> bool:
+        if len(self.stack):
+            return True
+        else:
+            return False
+173. Binary Search Tree Iterator
+# Definition for a binary tree node.
+from collections import deque
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+        
+class BSTIterator:
+
+    
+    def __init__(self, root: Optional[TreeNode]):
+        self.ordered=[]
+        self.next_=0
+        self.traverse(root)
+    
+    def traverse(self,root):
+        if not root:
+            return
+        self.traverse(root.left)
+        self.ordered.append(root.val)
+        self.traverse(root.right)
+        
+    def next(self) -> int:
+        if self.next_< len(self.ordered):
+            value=self.ordered[self.next_]
+            self.next_=self.next_+1
+        return value
+
+    def hasNext(self) -> bool:
+        return not self.next_==len(self.ordered)
