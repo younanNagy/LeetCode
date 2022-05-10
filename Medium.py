@@ -334,3 +334,41 @@ class Solution:
         for digit in digits:
             results=addResults(digit)
         return results
+    
+    
+    
+    2. Add Two Numbers
+
+    # Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def getNumber(self,lis):
+        value=0
+        degree=0
+        while lis:
+            value=(lis.val*pow(10,degree))+value
+            degree=degree+1
+            lis=lis.next
+        return value
+    def buildLinkedList(self,numb):
+        head=ListNode()
+        list_head=head
+        while numb>0:
+            digit=numb%10
+            numb=numb//10
+            head.val=digit
+            if numb>0:
+                head.next=ListNode()
+                head=head.next
+        return list_head
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        numb1=self.getNumber(l1)
+        numb2=self.getNumber(l2)
+        
+        head=self.buildLinkedList(numb1+numb2)
+        return head 
+        
+        
