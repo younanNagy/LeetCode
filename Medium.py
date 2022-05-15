@@ -49,9 +49,9 @@ class Solution:
         number_of_latin=0
         for number in latin_mapping.items():
             value=number[0]
-            number_of_latin=num//value
+            number_of_latin=num//value#how many latin symbols in that number starting from bigger to smaller
             
-            result+=(number[1]*number_of_latin)   
+            result+=(number[1]*number_of_latin) 
             num=num%number[0]
             
         return result  
