@@ -400,3 +400,20 @@ class Solution:
                 traversed.append(level)
                 
         return traversed
+
+    
+    
+#Build and print LinkedList
+    def buildList(head,lis):
+    temp_head=head
+    for i in range(0,len(lis)):
+        head.val=lis[i]
+        if i<len(lis)-1:
+            head.next=ListNode()
+            head=head.next
+    return temp_head
+def printList(head):
+    if not head:
+        return
+    print(head.val)
+    printList(head.next)
